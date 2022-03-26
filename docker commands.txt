@@ -1,0 +1,916 @@
+sInstalling Docker
+--------------------------
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+---------------------------
+Add the Docker repository to APT sources
+
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+----------------------------------------------
+Next, update the package database with the Docker packages from the newly added repo:
+
+sudo apt-get update
+
+-------------------------------------
+-------------------------------------
+Make sure you are about to install from the Docker repo instead of the default Ubuntu
+
+apt-cache policy docker-ce
+
+---------------------------------------
+Finally, install Docker:
+
+sudo apt-get install -y docker-ce
+
+----------------------------------------
+Docker should now be installed, the daemon started, and the process enabled to start on boot. Check that it’s running:
+
+sudo systemctl status docker
+
+steps to run java server;
+-------------------------
+Create a directory
+Directory is required to organize files.
+
+mkdir  java-docker-app  
+
+-------------------------------------
+Create a Java File
+
+nano Hello.java
+
+class Hello{  
+
+class Hello{  
+public static void main(String[] args){  
+System.out.println("This is java app \n by using Docker");  
+}  
+}  
+
+----------------------------
+Create a Dockerfile
+After creating a Java file, we need to create a Dockerfile which contains instructions for the Docker. Dockerfile does not contain any file extension. So,
+save it simple with Dockerfile name
+
+nano  Dockerfile
+
+FROM java:8  
+COPY . /var/www/java  
+WORKDIR /var/www/java  
+RUN javac Hello.java  
+CMD ["java", "Hello"]  
+
+-------------------------------------
+Build Docker Image
+After creating Dockerfile, we are changing working directory.
+
+cd   java-docker-app  
+
+-------------------------------
+docker build -t java-app .
+---------------------------------
+Run Docker Image
+After creating image successfully. Now we can run docker by using run command. The following command is used to run java-app.
+
+docker run java-app  
+===============================================================================================================
+Steps to run Python server;
+--------------------------
+
+Create a directory.
+mkdir docker-python-app  
+------------------------
+Enter into Directory
+cd docker-python-app
+------------------------------
+Create Dockerfile
+It is require to create Docker image. It contains instructions that are read by Docker.
+
+
+nano Dockerfile
+
+FROM python  
+COPY . /src  
+CMD ["python", "/src/index.py"]  
+-----------------------------------
+Create a Python file
+Create a python file to execute in the Docker container.
+
+nano index.py
+
+print("Hello from python file");  
+---------------------------------------
+Create Docker Image
+To create Docker image of this python application, we need to use the following Docker command.
+
+docker build -t python-app .  
+
+Check the available Docker images
+We can see all the available Docker images by the following command.
+
+docker images  
+---------------------------------------
+Run Docker
+After creating docker image, now we can run it by using the following command.
+
+ docker run python-app
+================================================================================================================================
+Steps ton install TOMCAT server;
+---------------------------------
+
+---Docker install Tomcat
+
+git clone https://github.com/softwareyoga/docker-tomcat-tutorial.git
+
+ls
+
+Dockerfile README.md sample.war
+---------------------------------------
+go to folder
+
+check dockerfile
+
+----Build docker
+
+docker build -t mywebapp .
+
+--------show image id----
+
+docker image ls
+-------run-----------------------------
+
+docker run -p 80:8080 mywebapp
+
+------------
+open on browser
+http://3.20.238.178:80
+============================================================================================================================
+
+
+
+
+
+=============maven==================
+
+sudo apt-get update
+
+sudo add-apt-repository ppa:openjdk-r/ppa
+
+sudo apt-get update 
+sudo apt-get install openjdk-8-jdk
+
+java -version
+sudo apt-get install git -y
+apt-cache search maven
+sudo apt-get install maven
+mvn -version
+maven-samples
+ mkdir hello-world
+ cd hello-world
+touch pom.xml
+nano pom.xml
+
+<project>
+  <groupId>org.qt.devops</groupId> 
+  <artifactId>hello-world</artifactId> 
+  <version>1.0-SNAPSHOT</version> 
+  <modelVersion>4.0.0</modelVersion> 
+  <packaging>jar</packaging> 
+  </project>
+
+mkdir -p src/main/java
+
+cd src/main/java
+
+ touch Helloworld.java
+
+write java code
+
+class Simple{  
+    public static void main(String args[]){  
+     System.out.println("Hello Java");  
+    }  
+}  
+
+enter to pom.xml
+mvn compile
+ error display
+
+change string args and compile
+mvn compile
+create one target file under create .class file
+mvn package
+
+git clone https://github.com/wakaleo/game-of-life.git
+
+cd game-of-life
+
+mvn compile
+
+mvn test
+
+mvn package
+============================================================================================================
+ANSIBLE COMMANDS;
+---------------------------------
+sudo apt-get update-->update command
+
+$ sudo apt-get install software-properties-common--->install properties
+
+$ sudo apt-add-repository ppa:ansible/ansible--->Add Repository
+
+-----upto 2 machines
+
+$ sudo apt-get update-->update
+
+$ sudo apt-get install ansible-->install Ansible
+----------only master
+
+sudo apt-get install python----only child
+--master
+
+ssh ubuntu@secondmachine ip
+
+
+go to cd .ssh
+
+ssh-keygen---only master
+
+
+under id_rsa.pub and paste child
+
+go to child
+
+cd .ssh
+
+sudo nano authorizedkeys
+
+paste master id_rsa.pub  and save
+-------------------------------check master
+ubuntu@childip
+
+acess(permission denied issue solve)
+
+----------
+to enter master
+exit
+child connection close
+
+-------master
+sudo nano /etc/ansible/hosts
+
+--go last inside
+--create group,group rules
+[production]
+
+
+slave1 ansible_ssh_host=childmachineip
+
+
+
+---------------------------master
+ansible -m ping all
+
+-------------------------------
+ansible -m ping production
+
+
+------------------------------
+ ansible -m ping slave1
+------------------------------
+===================================================
+JENKINS COMMANDS----
+
+
+--------------------------------------------------
+sudo apt update  
+
+------------------------------
+Install Java
+
+sudo apt install openjdk-8-jdk  
+---------------------------------
+Add the Jenkins Debian Repository
+Import the GPG (GnuPG - GNU Privacy Guard) keys of the Jenkins repository using the following wget command:
+
+wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add -  
+----------------------------------
+add the Jenkins repository to the system
+
+sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'  
+---------------------------------
+Install Jenkins
+
+sudo apt update  
+--------------------------------
+install the latest version of Jenkins
+
+sudo apt install jenkins
+
+Once the installation is completed, Jenkins service will start automatically.
+ 
+----------------------------
+ systemctl status Jenkins
+--------------------
+
+Adjusting Firewall
+
+ sudo ufw allow 8080
+
+sudo ufw status  
+------------------------
+Setting Up Jenkins
+To set up the new Jenkins installation, open the browser, type the domain or IP address followed by port 8080, http://your_ip_or_domain:8080, and screen (unlock Jenkins screen)
+
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
+ip:8080
+
+6bc84e470c8f47a4ab85ae9b364b0efe
+
+
+---jenkins password
+
+TO CHANGE PORT NUMBER JENKINS :sudo nano /etc/default/jenkins
+
+sudo service jenkins restart
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+
+{JENKINS}===============
+
+
+
+JENKINS Installation Steps
+
+Step1: Install Oracle java 8 on ubuntu 14.04
+
+1. Add apt repository
+
+sudo apt-add-repository ppa:webupd8team/java
+
+Type in user password when it asks and hit Enter to continue.
+
+2. After that, update system package cache and install Oracle java 8
+
+sudo apt-get update
+
+
+sudo apt-get install oracle-java8-installer
+
+step2: check java version
+java -version
+
+Step3: To Set JAVA_HOME / PATH for all user, You need to setup global config
+in /etc/profile OR /etc/bash.bashrc file for all users:
+open /etc/profile
+
+vi /etc/profile
+
+add bellow steps end of file  
+
+export JAVA_HOME=/usr/lib/jvm/java-8-oracle/
+export PATH=$PATH:$HOME/bin:$JAVA_HOME/bin
+
+step4: check your path
+
+Step5: Install maven
+
+1. Download Apache Maven
+
+Go to /opt directory
+
+Download maven tar file
+
+wget http://www-eu.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-
+
+3.3.9-bin.tar.gz
+
+Extract Apache Maven:
+Using below command:
+
+sudo tar xzf apache-maven-3.3.9-bin.tar.gz
+
+After run below command:
+sudo ln -s /opt/apache-maven-3.3.9/bin/mvn /usr/bin/mvn
+
+Setup Environment
+vi /etc/profile
+
+M2_HOME=/opt/apache-maven-3.3.9
+PATH=$PATH:$M2_HOME/bin
+
+export M2_HOME
+export PATH
+step6: Check maven version
+
+
+Step7: Install Git
+apt-get install git
+
+Step8: JENKINS Installation On ubuntu:14.04
+Add apt repo
+
+wget -q -O - https://pkg.jenkins.io/debian/jenkins-ci.org.key | sudo apt-key add -
+
+sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ >
+/etc/apt/sources.list.d/jenkins.list'
+
+sudo apt-get update
+
+sudo apt-get install jenkins
+
+Check your Jenkins status
+
+Go to any browser give your ip:8080
+
+Install suggested plugins
+
+Step: Create user Fill all details whatever it asks After you will see like
+
+Step: Click on Mange Jenkins go to Global Tool Configuration
+
+Step: Set JAVA_HOME Path on Jenkins Server
+
+step: Set Maven path variable on Jenkins server
+
+Then click apply and save
+
+Create One Freestyle project
+
+Click Ok.
+The page will open like :
+
+Scroll down and in the Source code management section enter your source code path.
+Here, we took git as our source code path
+
+In the below Build section select "Invoke toplevel maven" in the option and enter Maven
+
+click apply and save
+
+Click Build Now option and goto console output check whether the build is
+
+success or fail
+you can also check about the build output by seeing the color of the status of the last build
+on the dashboard.
+
+Blue color represents success of the build and Red color represents failure of the build
+------------------------------------------------------------------
+Configuring Email notification:
+
+Go to Manage Jenkins and click on configure systems.
+
+At extreme end will see E-mail Notification and fill the details
+
+Default SMTP sever: smtp.gmail.com
+
+Default user email suffix: if it is Gmail give @gmail.com or if it is yahoo give
+
+@yahoo.com
+
+Click Use SMTP Authentication
+
+Username: give you mail id
+
+Password: give your mail id passwd
+
+Click SSL
+
+SMTP port: 465
+
+Click on test connection
+
+Give any gmail id and click test connection
+
+if it gives Email was successfully sent your Email notification successfully completed.
+
+While configuring Email notation if you’re getting below error:
+Click below link
+
+ https://www.google.com/settings/security/lesssecureapps
+ You will see turn off or turn on. Click Turn on
+After Compilation Email notification. Go to Job configuration at post build action select E-mail notification give mail id whom you want send about your build status.
+--------------------------------------
+
+Installing/Configuring Jenkins
+
+Installation Wizard
+
+• Utility in WebGUI that allows for some basic configuration and the installation of common plugins
+
+• After installing the package and starting the service via the CLI, the installation wizard becomes
+available from the Jenkins WebGUI.
+
+• http://your-server-fqdn:8080/
+
+• Secret password in /var/lib/jenkins/secrets/initialAdminPassword
+
+• Can add an admin user and set credentials
+Prerequisite Install
+
+1. Go to: http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+
+2. Download the appropriate Java jdk version from the Oracle website. For this course we use jdk-8u121.
+
+3. Copy the package from your local environment to the target server.
+• Below is an example using scp:
+
+scp jdk-8u121-linux-x64.rpm user@your-server:/home/user/
+6 -
+4. Install the jdk package.
+
+rpm -Uvh jdk-8u121-linux-x64.rpm
+
+5. Set up Alternatives for Java:
+
+alternatives --install /usr/bin/java java /usr/java/latest/bin/java
+200000
+
+alternatives --install /usr/bin/javac javac /usr/java/latest/bin/javac
+200000
+
+alternatives --install /usr/bin/jar jar /usr/java/latest/bin/jar 200000
+
+• Note: Check out Terry's nugget on this for more detail: "Setting local and global java
+environment variables"
+
+6. Set JAVA_HOME environmental variable in rc.local.
+vi /etc/rc.local
+
+export JAVA_HOME="/usr/java/latest"
+
+Jenkins Install
+
+1. Add the Jenkins repo to your yum sources on the CentOS node.
+
+wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhatstable/
+jenkins.repo
+
+2. Import the Jenkins rpm signing key.
+
+rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+
+3. Install the Jenkins package.
+
+• We will be using version 2.19.4 which is the target version for the certification test.
+yum install -y jenkins-2.19.4-1.1
+
+4. Check for services running on 8080 before starting the Jenkins service.
+
+netstat -tulpn | grep 8080
+
+5. If nothing is running on 8080, go ahead and start the service via systemctl.
+7 -
+systemctl start jenkins
+
+6. Also, enable the Jenkins service so it starts on system startup.
+systemctl enable jenkins
+
+7. Check again for services running on port 8080.
+
+• There will be a slight delay, so we'll use watch to wait for the signal.
+watch n=1 "netstat -tulpn | grep 8080"
+
+• ctrl-c to break the watch when the service is shown to be running on 8080
+
+8. Visit the WebGUI at: http://your-server-fqdn:8080/
+
+9. You'll be prompted for the initialAdminPassword which is located in
+/var/lib/jenkins/secrets/
+
+initialAdminPassword on the system being configured. You'll want to cat that and copy and paste it
+into the browser.
+
+cat /var/lib/jenkins/secrets/initialAdminPassword
+
+10. Paste the password into Install Wizard.
+
+11. Choose "Install Suggested Plugins."
+Note:
+• I've seen this fail before.
+
+• If you see several plugins that fail to install, and the install hangs at the "Getting Started" page, try
+the following:
+
+1. From the terminal on the Jenkins master:
+systemctl stop jenkins
+
+systemctl start jenkins
+
+2. Then, go back to the WebGUI and start again.
+
+12. Set admin settings, user, password, etc.
+13. Press "Enter."
+14. Click "Start Using Jenkins."
+8 -
+15. Now you have your Jenkins Master up and running!
+Configuring Jenkins
+
+Plugins
+Plugins add additional functionality to Jenkins.
+• Can be used to add functionality in many ways
+
+• "Credentials" manages user Credentials.
+
+• "Git" and "GitHub" manage Git integrations.
+
+• "JUnit" handles unit testing reports.
+
+• There are thousands of plugins.
+
+• Plugins (.hpi files) of various releases can be downloaded from:
+• http://updates.jenkins-ci.org/download/plugins
+Plugin Manager
+
+The UI to install and configure plugins in the Jenkins WebGUI
+Procedure for Installing Plugins
+
+1. From the Dashboard, click "Manage Jenkins."
+
+2. Click "Manage Plugins."
+
+3. Click the "Available" tab.
+
+4. Filter plugins for the targeted plugin with the search box.
+
+5. Click the "Install" button for the desired plugin.
+
+Procedure for Removing Plugins
+
+1. From the Dashboard, click "Manage Jenkins."
+
+2. Click "Manage Plugins."
+
+3. Click the "Installed" tab.
+
+4. Click the "Uninstall" button for the desired plugin.
+Procedure for Downgrading Plugins
+
+9 -
+1. From the Dashboard, click "Manage Jenkins."
+2. Click "Manage Plugins."
+3. Click the "Installed" tab.
+
+4. Click the "Downgrade to..." button for the desired plugin.
+Procedure for Upgrading Plugins
+1. From the Dashboard, click "Manage Jenkins."
+2. Click "Manage Plugins."
+3. Click the "Updates" tab.
+4. Check the box next to the desired update.
+5. Click "Download now and install after restart."
+6. Restart the service jenkins service from the Jenkins master cli, or check the box that will do that for you.
+(Advanced) Installing a Plugin from a .hpi File
+1. From the Dashboard, click "Manage Jenkins."
+2. Click "Manage Plugins."
+3. Click the "Advanced" tab
+4. In the "Upload Plugin" section, use the "Choose File" button to navigate to your hpi file.
+5. Install it
+The Dashboard
+Left Panel
+• New Item
+• This is where you'll add projects, folders and pipelines.
+• The core of Jenkins functionality is here.
+• People
+• This is where you you can see a list of users and their latest activities.
+10 -
+• Build History
+• You'll see an overview display of build history for all projects in graphical form.
+• Manage Jenkins
+• Where Jenkins is managed
+• My Views
+• For configuring custom views for projects for the logged in user.
+• Credentials
+• Lists credentials that have been configured for Jenkins
+Build Queue
+Jobs waiting for an executor are listed here.
+Build Executor Status
+• The status of projects associated with Jenkins executors
+• An executor runs projects dictated by Jenkins.
+• They can run in parallel.
+• The default number of executors on the master is 2.
+Build History
+• Shows the history of builds
+• Stable is blue
+• Red is broken
+Authentication Versus Authorization
+Authentication identifies a user, while Authorization dictates what a user is allowed to do.
+Security Terms
+• Auditing: Tracking who did what on your Jenkins server
+• Credentials: Username/Password for logging into Jenkins
+11 -
+Matrix Security
+• Allows you to grant specific permissions to users and groups.
+• Most Common Permissions: Overall, Slave, Job, Run, View, and SCM.
+Configuration Procedure
+1. Go to the Jenkins Dashboard.
+http://<your-server>:8080
+2. Click "Manage Jenkins."
+3. Click "Configure Global Security."
+4. Check "Enable Security."
+5. Select "Jenkins' own user database."
+6. Place a check mark next to "Allow users to sign up."
+7. Select "Matrix-based Security."
+8. Select the admin user and check all the permissions.
+9. Click Save.
+10. (Optional) Set "Read" permissions for "Anonymous."
+11. (Optional) Set options appropriate for other users.
+Roles/Permissions
+Categories and Associated Permissions
+Overall
+• Administer:
+• Make system-wide configuration changes.
+• Perform highly sensitive operations that amounts to full local system access (within the scope
+granted by the underlying OS)
+• Read:
+• View almost all pages within Jenkins
+12 -
+• RunScripts:
+• Run groovy scripts via the groovy console or groovy cli command
+• UploadPlugins:
+• Upload arbitrary plugins
+• ConfigureUpdateCenter:
+• Configure update sites and proxy settings
+Slave
+• Configure:
+• Configure existing slaves
+• Delete:
+• Delete existing slaves
+Create:
+Create new slaves
+• Disconnect:
+• Disconnect slaves or mark slaves as temporarily offline
+• Connect:
+• Connect slaves or mark slaves as online
+Job
+• Create:
+• Create a new job
+• Delete:
+• Delete an existing job
+• Configure:
+• Update the configuration of an existing job
+• Read:
+• Grants read-only access to project configurations
+• Discover:
+• Redirect anonymous users to a login form rather than presenting an error message if they don't
+13 -
+have permission to view jobs
+• Build:
+• Start a new build and cancel a running build
+• Workspace:
+• Retrieve the contents of a workspace that Jenkins has checked out for performing a build
+• Cancel:
+• Cancel a running build
+Run
+• Delete:
+• Delete specific builds from a build's history
+• Update:
+• Update the description and other properties of a build
+• For example, to leave notes about the cause of a build failure
+View
+• Create:
+• Create new views
+• Delete:
+• Delete existing views
+• Configure:
+• Update the configuration of existing views
+• Read:
+• See any existing views
+SCM
+• Tag: Create a new tag in the source code repository for a given build
+Jobs/Projects
+Any executable task in Jenkins
+• The term "job" is now deprecated in favor of "project."
+14 -
+Organizing Projects
+Folders
+• Creates a container with nested items
+• It creates a separate namespace for the nested projects.
+• Projects can be organized in folders.
+Navigation
+Left Panel -> New Item -> Folder
+Adding Items to Folders
+• 3 Options:
+• Hover and click arrow on Existing Item; choose "move"; select target folder.
+• Click existing item; In the item view page, select "Move" in the left panel; select target folder.
+• For new items Click folder; in the folder view, select new item; it will automatically be added
+to that folder.
+Configuration
+• Health Metrics "Child item with worst health"
+• The item in the folder with the worst "health" dictates the health of the folder.
+• If you set recursive, item's in nested sub-folders are used to calculate this health.
+Views
+A view is simply a view of items configured in Jenkins.
+• The Dashboard has a default view, "All"
+• Can be configured for a user (using My Views) or system-wide
+• Add a new view by clicking the "+" next to the tabs in the table on the homepage or on the "My
+Views" page.
+Navigation
+• System-wide views can be accessed with tabs on the Dashboard home page.
+• User views, can be accessed with the "My Views" button in the left panel of the home page.
+My View
+15 -
+• Shows all projects that the user has access to
+List View
+• Shows projects in a simple list format.
+• You can arbitrarily filter which jobs show in this view.
+Configuration
+• Filter Build Queue/Executors
+• You can filter the projects that show in the Build Queue/Executor panels based on the filters set
+in this view.
+• Status filter
+• Filter based on the current status of the job
+Recursive in sub-folders
+• Allows you to list jobs that are nested in folders
+• Jobs
+• Select jobs to show in the view explicitly
+• Use a Regular Expression to include jobs into the view
+• Match Project names based on a regular expression
+• Example:
+.\*Project.\*
+Parameterized Projects
+• These projects accept user parameters. Parameters can be added during job configuration.
+• When triggering a build, one can select "Build with Parameters" and specify parameter values.
+• Parameters are exposed as environment variables to scripts, and can also be accessed from Project
+configuration.
+• Invocation Example:
+"${branch}"
+Configuration
+• From Project Configuration, select "This project is parameterized."
+16 -
+Parameter Types
+• String Parameter: The most common, generic parameter; simply a string
+• File Parameter: A file as a parameter; it should be in the workspace, as part of a source code
+management checkout
+• Boolean Parameter: A true/false value
+• Choice Parameter: dropdown list, first line is the default value
+• Credentials Parameter: Credential as a parameter; UUID is exposed
+• List Subversion tags: Tags in a subversion repo
+• Multi-line String Parameter: Like a string parameter, but multi-line
+• Password Parameter: A password that can be set as a string value; password is protected when
+input in "Build with parameters" view. Otherwise, it's accessed like a string parameter. The value is not
+protected in the console view.
+• Run Parameter:
+• Access information from a specified build of a project
+• To use a Run Parameter, the value should be in the format:
+jobname#buildNumber (eg. "&MyRunParam=foo-job%2399" for foo-job #99)
+===================================================================================================================================
+
+
+
+HADOOP
+
+
+************************************
+
+1) sudo su
+
+2) sudo apt-get update
+
+3) sudo apt-get install openjdk-8-jdk
+
+4)  Check the java version
+
+java –version
+
+5)  Download latest stable Hadoop using wget from one of the Apache mirrors.
+
+wget https://archive.apache.org/dist/hadoop/core/hadoop-2.6.0/hadoop-2.6.0.tar.gz
+
+tar xzf hadoop-2.6.0.tar.gz
+
+6)  Create a directory where the hadoop will store its data. We will
+set this directory path in hdfs-site.
+
+mkdir hadoopdata
+
+7)  Add the Hadoop related environment variables in your bash file.
+
+nano ~/.bashrc
+
+Copy and paste these environment variables.
+
+export HADOOP_HOME=/home/ubuntu/hadoop-2.6.0
+export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
+export HADOOP_OPTS="-Djava.library.path=$HADOOP_HOME/lib"
+
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+PATH=$PATH:$JAVA_HOME/bin:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
+
+8) Save and exit and use this command to refresh the bash settings.
+
+source ~/.bashrc
+
+s
+
+
+https://www.javatpoint.com/sql-interview-questions
+
+
+
+
+
+
+
